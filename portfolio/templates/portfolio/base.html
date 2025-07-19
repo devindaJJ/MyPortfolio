@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>{% block title %}My Portfolio{% endblock %}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" href="{% static 'portfolio/favicon.ico' %}" type="image/x-icon"/>
+<link rel="stylesheet" href="{% static 'dist/output.css' %}"/>
+<style>
+ html {
+ scroll-behavior: smooth;
+ }
+ 
+ /* tsParticles container styling */
+ #tsparticles {
+   position: fixed !important;
+   top: 0 !important;
+   left: 0 !important;
+   width: 100% !important;
+   height: 100% !important;
+   z-index: 15 !important; /* Higher z-index for interactions across entire page */
+   pointer-events: auto !important; /* Enable pointer events for interactivity */
+ }
+ 
+ /* Canvas styling - tsParticles creates this automatically */
+ #tsparticles canvas {
+   position: absolute !important;
+   top: 0 !important;
+   left: 0 !important;
+   width: 100% !important;
+   height: 100% !important;
+ }
+</style>
+</head>
+<body class="min-h-screen bg-[#120026] bg-opacity-90 backdrop-blur-xl relative overflow-x-hidden">
+
+{# tsParticles Container - Move to top for better layering #}
+<div id="tsparticles"></div>
+
+{# Background Gradient Layer #}
+<div class="fixed inset-0 z-0 bg-gradient-to-br from-[#1a0033]/90 via-[#120026]/95 to-[#120026]/90 backdrop-blur-2xl"></div>
+
+{# Header/Navbar #}
+<header class="relative z-30 border-b border-[#3D1768] backdrop-blur-md">
+<div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+<a href="{% url 'home' %}" class="text-xl font-bold text-white">My Portfolio</a>
+<nav class="space-x-6 hidden md:block">
+<a href="#home" class="text-white hover:text-purple-300 transition">Home</a>
+<a href="#projects" class="text-white hover:text-purple-300 transition">Projects</a>
+<a href="#contact" class="text-white hover:text-purple-300 transition">Contact</a>
+</nav>
+<div class="md:hidden text-white font-bold">
+ ☰
+</div>
+</div>
+</header>
+
+{# Page Content #}
+<main class="flex-1 relative z-10">
+{% block content %}
+{% endblock %}
+</main>
+
+{# Footer #}
+<footer class="relative z-30 bg-gradient-to-r from-[#2c1e4a] to-[#442063] backdrop-blur-md py-6 text-white border-t border-purple-800">
+<div class="max-w-7xl mx-auto px-4">
+<p>&copy; {{ now|default:2025 }} My Portfolio. All rights reserved.</p>
+<div class="mt-2 space-x-3">
+<a href="https://github.com/" target="_blank" class="hover:underline">GitHub</a>
+<a href="mailto:your@email.com" class="hover:underline">Email</a>
+<a href="{% url 'contact' %}" class="hover:underline">Contact</a>
+</div>
+</div>
+</footer>
+
+<!-- tsParticles CDN -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+<script>
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Initializing tsParticles...'); // Debug log
+    
+    tsParticles.load("tsparticles", {
+        fullScreen: { 
+            enable: false 
+        },
+        background: {
+            color: "transparent"
+        },
+        fpsLimit: 60,
+        particles: {
+            number: { 
+                value: 50,
+                density: {
+                    enable: true,
+                    value_area: 800
+                }
+            },
+            color: { 
+                value: ["#ffffff", "#e879f9", "#c084fc", "#a855f7"] 
+            },
+            shape: { 
+                type: "circle" 
+            },
+            size: { 
+                value: { min: 1, max: 4 },
+                random: true,
+                anim: {
+                    enable: true,
+                    speed: 2,
+                    size_min: 0.3,
+                    sync: false
+                }
+            },
+            opacity: { 
+                value: { min: 0.3, max: 1 },
+                random: true,
+                anim: {
+                    enable: true,
+                    speed: 1,
+                    opacity_min: 0.1,
+                    sync: false
+                }
+            },
+            move: {
+                enable: true,
+                speed: { min: 0.5, max: 2 },
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "out",
+                bounce: false,
+                attract: {
+                    enable: false
+                }
+            }
+        },
+        interactivity: {
+            detectsOn: "canvas",
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: ["grab", "bubble"]
+                },
+                onclick: {
+                    enable: true,
+                    mode: "push"
+                },
+                resize: true
+            },
+            modes: {
+                grab: {
+                    distance: 200,
+                    line_linked: {
+                        opacity: 0.5
+                    }
+                },
+                bubble: {
+                    distance: 300,
+                    size: 8,
+                    duration: 2,
+                    opacity: 0.8,
+                    speed: 3
+                },
+                push: {
+                    particles_nb: 4
+                }
+            }
+        },
+        detectRetina: true
+    }).then(function(container) {
+        console.log('tsParticles loaded successfully!'); // Debug log
+    }).catch(function(error) {
+        console.error('tsParticles failed to load:', error); // Error log
+    });
+});
+</script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

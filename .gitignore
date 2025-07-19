@@ -1,0 +1,55 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.log
+
+# Django
+db.sqlite3
+*.sqlite3
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.migrations/
+*.bak
+
+# Virtualenv
+env/
+venv/
+ENV/
+VENV/
+.venv/
+
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Tailwind CSS and PostCSS
+node_modules/
+*.tmp
+*.temp
+*.lock
+*.json
+
+# Tailwind Output CSS
+portfolio/static/dist/output.css
+
+# dotenv
+.env
+
+# Other common frontend build folders
+coverage/
+.cache/
+.next/
+out/
+build/
+dist/
+public/
+staticfiles*/ 
