@@ -5,247 +5,6 @@
 {% block content %}
 {% load static %}
 
-<!-- Add Flowing Ribbon Wave Styles -->
-<style>
-    .ribbon-container {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        pointer-events: none;
-        z-index: 1; /* Behind content but above background */
-    }
-    
-    .ribbon-wave {
-        position: absolute;
-        width: 150%;
-        height: 100%;
-        opacity: 0.3; /* Reduced opacity to blend better */
-    }
-    
-    .ribbon-path {
-        fill: none;
-        stroke-width: 1.5; /* Slightly thinner */
-        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2));
-    }
-    
-    .ribbon-1 {
-        stroke: rgba(255, 255, 255, 0.6);
-        animation: flow-ribbon-1 20s ease-in-out infinite;
-    }
-    
-    .ribbon-2 {
-        stroke: rgba(168, 85, 247, 0.7); /* More visible purple */
-        animation: flow-ribbon-2 25s ease-in-out infinite;
-        animation-delay: -5s;
-    }
-    
-    .ribbon-3 {
-        stroke: rgba(232, 121, 249, 0.5);
-        animation: flow-ribbon-3 30s ease-in-out infinite;
-        animation-delay: -10s;
-    }
-    
-    @keyframes flow-ribbon-1 {
-        0%, 100% {
-            d: path("M-200,200 Q200,150 600,250 T1400,200 T2000,300");
-        }
-        25% {
-            d: path("M-200,250 Q200,200 600,150 T1400,250 T2000,200");
-        }
-        50% {
-            d: path("M-200,180 Q200,300 600,200 T1400,180 T2000,350");
-        }
-        75% {
-            d: path("M-200,220 Q200,100 600,280 T1400,220 T2000,150");
-        }
-    }
-    
-    @keyframes flow-ribbon-2 {
-        0%, 100% {
-            d: path("M-200,350 Q300,250 700,400 T1500,350 T2200,450");
-        }
-        25% {
-            d: path("M-200,400 Q300,300 700,250 T1500,400 T2200,300");
-        }
-        50% {
-            d: path("M-200,320 Q300,450 700,350 T1500,320 T2200,500");
-        }
-        75% {
-            d: path("M-200,380 Q300,200 700,430 T1500,380 T2200,250");
-        }
-    }
-    
-    @keyframes flow-ribbon-3 {
-        0%, 100% {
-            d: path("M-200,500 Q400,400 800,550 T1600,500 T2400,600");
-        }
-        25% {
-            d: path("M-200,550 Q400,450 800,400 T1600,550 T2400,450");
-        }
-        50% {
-            d: path("M-200,470 Q400,600 800,500 T1600,470 T2400,650");
-        }
-        75% {
-            d: path("M-200,530 Q400,350 800,580 T1600,530 T2400,400");
-        }
-    }
-    
-    /* Horizontal movement */
-    .ribbon-horizontal {
-        animation: ribbon-move 40s linear infinite;
-    }
-    
-    @keyframes ribbon-move {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(-25%);
-        }
-    }
-    
-    /* Sparkle particles along ribbons */
-    .ribbon-sparkles {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        z-index: 1;
-    }
-    
-    .sparkle {
-        position: absolute;
-        width: 2px; /* Smaller sparkles */
-        height: 2px;
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 50%;
-        animation: sparkle-twinkle 3s ease-in-out infinite;
-    }
-    
-    .sparkle:nth-child(1) { top: 25%; left: 10%; animation-delay: 0s; }
-    .sparkle:nth-child(2) { top: 45%; left: 20%; animation-delay: 0.5s; }
-    .sparkle:nth-child(3) { top: 35%; left: 30%; animation-delay: 1s; }
-    .sparkle:nth-child(4) { top: 55%; left: 40%; animation-delay: 1.5s; }
-    .sparkle:nth-child(5) { top: 30%; left: 50%; animation-delay: 2s; }
-    .sparkle:nth-child(6) { top: 50%; left: 60%; animation-delay: 2.5s; }
-    .sparkle:nth-child(7) { top: 40%; left: 70%; animation-delay: 1.2s; }
-    .sparkle:nth-child(8) { top: 60%; left: 80%; animation-delay: 1.8s; }
-    .sparkle:nth-child(9) { top: 35%; left: 90%; animation-delay: 0.8s; }
-    .sparkle:nth-child(10) { top: 25%; left: 15%; animation-delay: 2.2s; }
-    .sparkle:nth-child(11) { top: 55%; left: 25%; animation-delay: 0.3s; }
-    .sparkle:nth-child(12) { top: 45%; left: 35%; animation-delay: 1.7s; }
-    
-    @keyframes sparkle-twinkle {
-        0%, 100% {
-            opacity: 0;
-            transform: scale(0.5);
-        }
-        50% {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-    
-    /* Hero section adjustments */
-    .hero-section {
-        position: relative;
-        min-height: 80vh;
-        overflow: hidden;
-    }
-    
-    /* Ensure content stays above ribbons but below particles */
-    .hero-content {
-        position: relative;
-        z-index: 5; /* Lower z-index so particles can interact above it */
-    }
-    .skills-container {
-    position: relative;
-    width: 100%;
-    max-width: 1024px;
-    margin: 0 auto;
-    }
-
-    .skill-icon {
-        position: absolute;
-        width: 2.5%;
-        height: auto;
-        aspect-ratio: 1;
-        min-width: 24px;
-        max-width: 40px;
-        transition: all 0.3s ease;
-        transform: translate(-50%, -50%); /* Center the icon on the circle */
-    }
-
-    .skill-icon:hover {
-        transform: translate(-50%, -50%) scale(1.2);
-        z-index: 10;
-    }
-
-    .skill-icon.animate-mirror-spin:hover {
-        transform: translate(-50%, -50%) scale(1.2) rotateY(var(--rotation, 0deg));
-    }
-
-    @keyframes mirror-spin {
-        0% {
-            transform: translate(-50%, -50%) rotateY(0deg);
-        }
-        50% {
-            transform: translate(-50%, -50%) rotateY(180deg);
-        }
-        100% {
-            transform: translate(-50%, -50%) rotateY(360deg);
-        }
-    }
-
-    .skill-icon.animate-mirror-spin {
-        animation: mirror-spin 1s ease-in-out;
-    }
-
-    /* Top Row - Corrected positions to match your actual circles */
-    .skill-icon-1 { top: 4%; left: 25%; } /* Tailwind */
-    .skill-icon-2 { top: 4%; left: 31%; } /* Figma */
-    .skill-icon-3 { top: 4%; left: 37%; } /* React */
-    .skill-icon-4 { top: 4%; left: 43%; } /* C */
-    .skill-icon-5 { top: 4%; left: 49.7%; } /* Node.js */
-    .skill-icon-6 { top: 4%; left: 55.5%; } /* HTML */
-    .skill-icon-7 { top: 4%; left: 61.5%; } /* CSS */
-    .skill-icon-8 { top: 4%; left: 67.5%; } /* JS */
-    .skill-icon-9 { top: 4%; left: 74%; } /* Selenium */
-
-    /* Bottom Row - Corrected positions to match your actual circles */
-    .skill-icon-10 { top: 13%; left: 34%; } /* Spring */
-    .skill-icon-11 { top: 13%; left: 40.8%; } /* MongoDB */
-    .skill-icon-12 { top: 13%; left: 46.4%; } /* Java */
-    .skill-icon-13 { top: 13%; left: 52.7%; } /* Python */
-    .skill-icon-14 { top: 13%; left: 59%; } /* Django */
-    .skill-icon-15 { top: 13%; left: 65.3%; } /* Kotlin */
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .skill-icon {
-            min-width: 20px;
-            max-width: 32px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .skill-icon {
-            min-width: 16px;
-            max-width: 28px;
-        }
-    }
-
-    @media (min-width: 1200px) {
-        .skill-icon {
-            max-width: 48px;
-        }
-    }
-</style>
 
 <!-- Hero Section -->
     <!-- Flowing Ribbon Waves -->
@@ -289,7 +48,7 @@
     
     <!-- Text Content -->
     <div class="hero-content w-full max-w-6xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 items-center gap-10">
-        <div class="text-left">
+        <div class="text-left relative z-30">
             <h1 class="text-5xl font-extrabold leading-tight mb-6">
                 <span class="text-white">Automate.</span>
                 <span class="text-[#a56cf5]"> Innovate.</span>
@@ -333,21 +92,171 @@
         <img src="{% static 'portfolio/django.svg' %}" alt="Django" class="skill-icon skill-icon-14" />
         <img src="{% static 'portfolio/kotlin.svg' %}" alt="Kotlin" class="skill-icon skill-icon-15" />
     </div>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const icons = document.querySelectorAll(".skill-icon");
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("animate-mirror-spin");
-            }
-          });
-        }, { threshold: 0.3 });
+</section>
 
-        icons.forEach(icon => observer.observe(icon));
-      });
-    </script>
+<!-- Advanced Tools & Technologies Section -->
+<section id="tools" class="min-h-screen text-white py-20 relative overflow-hidden z-20">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">
+        <span class="text-white">Tools &</span>
+        <span class="text-purple-400"> Technologies</span>
+      </h2>
+      <p class="text-lg text-white/70 max-w-2xl mx-auto">
+        The technologies I specialize in, organized for clarity and easy reference.
+      </p>
+    </div>
 
+    <!-- Tab Navigation -->
+    <div class="flex justify-center flex-wrap gap-4 mb-10">
+      <button class="tool-tab active" data-category="frontend">Frontend</button>
+      <button class="tool-tab" data-category="backend">Backend</button>
+      <button class="tool-tab" data-category="mobile">Mobile</button>
+      <button class="tool-tab" data-category="database">Database</button>
+      <button class="tool-tab" data-category="automation">Automation</button>
+      <button class="tool-tab" data-category="design">Design</button>
+    </div>
+
+    <!-- Carousel Container -->
+    <div class="tool-carousel-container relative pb-6">
+      <!-- Carousel Track -->
+      <div class="tool-carousel-track">
+        <!-- Frontend Card -->
+        <div class="tool-card glass-card active" data-category="frontend">
+          <div class="card-content">
+            <h3 class="text-2xl font-semibold text-center text-purple-400 mb-6">Frontend Development</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+              <div class="tech-item">
+                <img src="{% static 'portfolio/react.svg' %}" alt="React" class="tech-icon">
+                <span>React</span>
+                <p class="tech-desc">Building interactive UIs with component-based architecture</p>
+              </div>
+              <div class="tech-item">
+                <img src="{% static 'portfolio/html.svg' %}" alt="HTML5" class="tech-icon">
+                <span>HTML5</span>
+                <p class="tech-desc">Semantic markup for accessible web content</p>
+              </div>
+              <div class="tech-item">
+                <img src="{% static 'portfolio/css.svg' %}" alt="CSS3" class="tech-icon">
+                <span>CSS3</span>
+                <p class="tech-desc">Modern styling with animations and responsive design</p>
+              </div>
+              <div class="tech-item">
+                <img src="{% static 'portfolio/js.svg' %}" alt="JavaScript" class="tech-icon">
+                <span>JavaScript</span>
+                <p class="tech-desc">Dynamic functionality and modern ES6+ features</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend Card -->
+        <div class="tool-card glass-card" data-category="backend">
+          <div class="card-content">
+            <h3 class="text-2xl font-semibold text-center text-purple-400 mb-6">Backend Development</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+              <div class="tech-item">
+                <img src="{% static 'portfolio/python.svg' %}" alt="Python" class="tech-icon">
+                <span>Python</span>
+                <p class="tech-desc">Versatile scripting and backend logic implementation</p>
+              </div>
+              <div class="tech-item">
+                <img src="{% static 'portfolio/django.svg' %}" alt="Django" class="tech-icon">
+                <span>Django</span>
+                <p class="tech-desc">High-level Python web framework with batteries included</p>
+              </div>
+              <div class="tech-item">
+                <img src="{% static 'portfolio/java.svg' %}" alt="Java" class="tech-icon">
+                <span>Java</span>
+                <p class="tech-desc">Enterprise-grade backend services and applications</p>
+              </div>
+              <div class="tech-item">
+                <img src="{% static 'portfolio/spring.svg' %}" alt="Spring Boot" class="tech-icon">
+                <span>Spring Boot</span>
+                <p class="tech-desc">Rapid Java application development framework</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Card -->
+        <div class="tool-card glass-card" data-category="mobile">
+          <div class="card-content">
+            <h3 class="text-2xl font-semibold text-center text-purple-400 mb-6">Mobile Development</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-center">
+              <div class="tech-item">
+                <img src="{% static 'portfolio/kotlin.svg' %}" alt="Kotlin" class="tech-icon">
+                <span>Kotlin</span>
+                <p class="tech-desc">Modern Android development with concise syntax</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Database Card -->
+        <div class="tool-card glass-card" data-category="database">
+          <div class="card-content">
+            <h3 class="text-2xl font-semibold text-center text-purple-400 mb-6">Database Systems</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-center">
+              <div class="tech-item">
+                <img src="{% static 'portfolio/mongodb.svg' %}" alt="MongoDB" class="tech-icon">
+                <span>MongoDB</span>
+                <p class="tech-desc">NoSQL database for flexible, scalable data storage</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Automation Card -->
+        <div class="tool-card glass-card" data-category="automation">
+          <div class="card-content">
+            <h3 class="text-2xl font-semibold text-center text-purple-400 mb-6">Automation</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-center">
+              <div class="tech-item">
+                <img src="{% static 'portfolio/selenium.svg' %}" alt="Selenium" class="tech-icon">
+                <span>Selenium</span>
+                <p class="tech-desc">Browser automation for testing and web scraping</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Design Card -->
+        <div class="tool-card glass-card" data-category="design">
+          <div class="card-content">
+            <h3 class="text-2xl font-semibold text-center text-purple-400 mb-6">Design Tools</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 justify-center">
+              <div class="tech-item">
+                <img src="{% static 'portfolio/figma.svg' %}" alt="Figma" class="tech-icon">
+                <span>Figma</span>
+                <p class="tech-desc">Collaborative interface design and prototyping</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Dots -->
+    <div class="carousel-dots flex justify-center mt-2 px-2 space-x-2">
+        <!-- Dots will be added dynamically by JavaScript -->
+    </div>
+
+      <!-- Navigation Arrows -->
+      <div class="absolute inset-0 flex items-center justify-between px-2 pointer-events-none" style="height: 75%;">
+        <button class="carousel-nav carousel-prev pointer-events-auto rounded-full p-2 shadow-lg focus:outline-none" style="top: 50%; background: transparent;">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button class="carousel-nav carousel-next pointer-events-auto rounded-full p-2 shadow-lg focus:outline-none" style="top: 50%; background: transparent;">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- Contact Section -->
@@ -356,24 +265,4 @@
 </section> {% endcomment %}
 
 
-{% endblock %}
-
-{% block extra_js %}
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const icons = document.querySelectorAll(".skill-icon");
-
-        const observer = new IntersectionObserver(entries => {
-          entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-              setTimeout(() => {
-                entry.target.classList.add("animate-mirror-spin");
-              }, index * 100);
-            }
-          });
-        }, { threshold: 0.3 });
-
-        icons.forEach(icon => observer.observe(icon));
-      });
-    </script>
 {% endblock %}
