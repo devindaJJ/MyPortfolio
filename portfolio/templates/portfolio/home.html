@@ -259,6 +259,100 @@
   </div>
 </section>
 
+<!-- Certifications Section -->
+<section id="certifications" class="min-h-screen text-white py-20 relative overflow-hidden z-20">
+    <!-- Wave Background -->
+    <div class="ribbon-container">
+        <svg class="ribbon-wave ribbon-horizontal" viewBox="0 0 2000 800" preserveAspectRatio="none">
+            <path class="ribbon-path ribbon-1" d="M-200,200 Q200,150 600,250 T1400,200 T2000,300"/>
+            <path class="ribbon-path ribbon-2" d="M-200,350 Q300,250 700,400 T1500,350 T2200,450"/>
+            <path class="ribbon-path ribbon-3" d="M-200,500 Q400,400 800,550 T1600,500 T2400,600"/>
+        </svg>
+        
+        <svg class="ribbon-wave ribbon-horizontal" viewBox="0 0 2000 800" preserveAspectRatio="none" style="left: 75%;">
+            <path class="ribbon-path ribbon-1" d="M-200,200 Q200,150 600,250 T1400,200 T2000,300"/>
+            <path class="ribbon-path ribbon-2" d="M-200,350 Q300,250 700,400 T1500,350 T2200,450"/>
+            <path class="ribbon-path ribbon-3" d="M-200,500 Q400,400 800,550 T1600,500 T2400,600"/>
+        </svg>
+        
+        <div class="ribbon-sparkles">
+            {% for _ in "x"|rjust:"12" %}<div class="sparkle"></div>{% endfor %}
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-30">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                <span class="text-white">Professional</span>
+                <span class="text-purple-400"> Certifications</span>
+            </h2>
+            <p class="text-lg text-white/70 max-w-2xl mx-auto">
+                Validations of my expertise and commitment to continuous learning.
+            </p>
+        </div>
+
+        <!-- Certifications Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Fixed Certification Card Structure -->
+        {% for cert in certifications %}
+        <div class="certification-card">
+            <div class="certification-card-inner">
+                <!-- Front Side -->
+                <div class="certification-card-front glass-card p-6 rounded-xl flex flex-col items-center justify-center">
+                    <div class="w-24 h-24 mb-6 bg-purple-500/20 rounded-full flex items-center justify-center">
+                        {% if cert.certificate_image %}
+                        <img src="{{ cert.certificate_image.url }}" alt="{{ cert.name }}" class="w-12 h-12 object-contain rounded-full">
+                        {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {% endif %}
+                    </div>
+                    <h3 class="text-xl font-semibold text-center mb-2">{{ cert.name }}</h3>
+                    <p class="text-sm text-white/70 text-center mb-4">{{ cert.issuing_organization }}</p>
+                    <div class="flex justify-center">
+                        <span class="px-3 py-1 bg-purple-800/40 text-purple-300 rounded-full text-xs">
+                            {{ cert.issue_date|date:"Y" }}
+                        </span>
+                    </div>
+                    <button class="flip-button" type="button" title="View certificate details">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Back Side -->
+                <div class="certification-card-back">
+                    <div class="cert-details">
+                        <h3 class="text-xl font-semibold mb-2 text-white">{{ cert.name }}</h3>
+
+                        <!-- Certificate Image Container - Updated -->
+                        {% if cert.certificate_image %}
+                        <div class="cert-image-container mb-3">
+                            <img src="{{ cert.certificate_image.url }}" 
+                                 alt="{{ cert.name }} Certificate" 
+                                 class="cert-image"
+                                 onclick="window.open('{{ cert.certificate_image.url }}', '_blank')">
+                        </div>
+                        {% endif %}
+
+                        <div class="cert-info">
+                            <strong>Issued by:</strong> {{ cert.issuing_organization }}<br>
+                            <strong>Date:</strong> {{ cert.issue_date|date:"F Y" }}<br>
+                            {% if cert.credential_id %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+</section>
+
 <!-- Contact Section -->
 {% comment %} <section id="contact" class="py-20 bg-[#2d014d]/70 backdrop-blur-lg rounded-xl shadow-2xl border border-white/10 text-center text-white mt-8">
     {% include 'portfolio/contact.html' %}

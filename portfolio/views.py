@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Project, Skill
+from .models import Project, Skill, Certification
 
 def home(request):
     tech_logos = [
@@ -22,3 +22,10 @@ def projects(request):
 
 def contact(request):
     return render(request, 'portfolio/contact.html')
+
+def home(request):
+    certifications = Certification.objects.filter(is_active=True).order_by('-issue_date')
+    context = {
+        'certifications': certifications
+    }
+    return render(request, 'portfolio/home.html', context)

@@ -106,3 +106,95 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize everything
   initCarousel();
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Certifications JS loading...');
+    
+    const flipButtons = document.querySelectorAll('.flip-button');
+    const certificationCards = document.querySelectorAll('.certification-card');
+    
+    console.log(`Found ${flipButtons.length} flip buttons and ${certificationCards.length} cards`);
+    
+    // Add hover effects
+    certificationCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            if (!card.classList.contains('flipped')) {
+                card.style.transform = 'translateZ(10px) scale(1.02)';
+            }
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            if (!card.classList.contains('flipped')) {
+                card.style.transform = 'translateZ(0) scale(1)';
+            }
+        });
+    });
+    
+    // Add click handlers to flip buttons
+    flipButtons.forEach((button, index) => {
+        button.addEventListener('click', function(e) {
+            e.stopPropagation();
+            e.preventDefault();
+            
+            const card = this.closest('.certification-card');
+            
+            console.log(`Flipping card ${index + 1}`);
+            
+            // Close all other cards first
+            certificationCards.forEach(otherCard => {
+                if (otherCard !== card && otherCard.classList.contains('flipped')) {
+                    otherCard.classList.remove('flipped');
+                    otherCard.style.transform = 'translateZ(0) scale(1)';
+                }
+            });
+            
+            // Toggle current card
+            card.classList.toggle('flipped');
+            
+            // Reset hover effect when flipped
+            if (card.classList.contains('flipped')) {
+                card.style.transform = 'translateZ(0) scale(1)';
+            }
+        });
+    });
+    
+    // Also allow clicking anywhere on the card to flip
+    certificationCards.forEach((card, index) => {
+        card.addEventListener('click', function(e) {
+            // Don't flip if clicking on flip button or image
+            if (!e.target.closest('.flip-button') && !e.target.closest('img')) {
+                const flipButton = this.querySelector('.flip-button');
+                if (flipButton) {
+                    flipButton.click();
+                }
+            }
+        });
+    });
+
+    // Close cards when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.certification-card')) {
+            certificationCards.forEach(card => {
+                if (card.classList.contains('flipped')) {
+                    card.classList.remove('flipped');
+                    card.style.transform = 'translateZ(0) scale(1)';
+                }
+            });
+        }
+    });
+
+    // Handle page visibility change (when user returns from new tab)
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            setTimeout(() => {
+                certificationCards.forEach(card => {
+                    if (!card.classList.contains('flipped')) {
+                        card.style.transform = 'translateZ(0) scale(1)';
+                    }
+                });
+            }, 100);
+        }
+    });
+
+    console.log('✅ Certifications JS fully loaded');
+});
