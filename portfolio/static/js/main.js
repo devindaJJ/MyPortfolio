@@ -467,3 +467,33 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCharCount(); // Initial count
     }
 });
+
+// About Me Section Animation
+function animateAboutSection() {
+    const aboutSection = document.getElementById('about');
+    const timelineItems = document.querySelectorAll('.timeline-item');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Animate profile image
+                aboutSection.querySelector('.profile-image-container').classList.add('animate-fadeInUp');
+                
+                // Animate timeline items sequentially
+                timelineItems.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('animate-fadeInLeft');
+                    }, index * 200);
+                });
+                
+                // Unobserve after animation
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    observer.observe(aboutSection);
+}
+
+// Call the function when DOM is loaded
+document.addEventListener('DOMContentLoaded', animateAboutSection);

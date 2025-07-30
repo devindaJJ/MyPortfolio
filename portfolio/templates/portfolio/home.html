@@ -68,6 +68,159 @@
     </div>
 </section>
 
+<!-- About Me Section -->
+<section id="about" class="min-h-screen text-white py-20 relative overflow-hidden z-10">
+    <!-- Decorative Ribbons -->
+    <div class="ribbon-container">
+        <svg class="ribbon-wave ribbon-horizontal" viewBox="0 0 2000 800" preserveAspectRatio="none">
+            <path class="ribbon-path ribbon-1" d="M-200,200 Q200,150 600,250 T1400,200 T2000,300"/>
+            <path class="ribbon-path ribbon-2" d="M-200,350 Q300,250 700,400 T1500,350 T2200,450"/>
+            <path class="ribbon-path ribbon-3" d="M-200,500 Q400,400 800,550 T1600,500 T2400,600"/>
+        </svg>
+        <svg class="ribbon-wave ribbon-horizontal" viewBox="0 0 2000 800" preserveAspectRatio="none" style="left: 75%;">
+            <path class="ribbon-path ribbon-1" d="M-200,200 Q200,150 600,250 T1400,200 T2000,300"/>
+            <path class="ribbon-path ribbon-2" d="M-200,350 Q300,250 700,400 T1500,350 T2200,450"/>
+            <path class="ribbon-path ribbon-3" d="M-200,500 Q400,400 800,550 T1600,500 T2400,600"/>
+        </svg>
+        <div class="ribbon-sparkles">
+            {% for _ in "x"|rjust:"12" %}<div class="sparkle"></div>{% endfor %}
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-30">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">
+                <span class="text-white">About</span>
+                <span class="text-purple-400"> Me</span>
+            </h2>
+            <p class="text-lg text-white/70 max-w-2xl mx-auto">
+                Get to know the person behind the code
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Profile Image -->
+            <div class="relative flex justify-center lg:justify-end">
+                <div class="relative group">
+                    <img src="{% static 'portfolio/profile.heic' %}" alt="Devinda Jayathilake" 
+                         class="w-full max-w-md rounded-2xl border-2 border-purple-400/30 shadow-xl shadow-purple-900/20 transform transition-all duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-purple-900/10 rounded-2xl mix-blend-multiply transition-all duration-500 group-hover:opacity-0"></div>
+                    <div class="absolute -inset-4 rounded-2xl border-2 border-purple-400/20 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-8">
+                <div class="glass-card-about p-8 rounded-2xl">
+                    <h3 class="text-2xl font-bold text-purple-400 mb-4">Who I Am</h3>
+                    <p class="text-white/90 leading-relaxed">
+                        Hi, I'm Devinda Jayathilake, a passionate full-stack developer specializing in creating elegant solutions to complex problems. With expertise in Python, JavaScript, and modern web frameworks, I bridge the gap between technical functionality and beautiful user experiences.
+                    </p>
+                </div>
+
+                <div class="glass-card-about p-8 rounded-2xl">
+                    <h3 class="text-2xl font-bold text-purple-400 mb-4">What I Do</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-8 h-8 rounded-full bg-purple-900/30 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Web Development</h4>
+                                <p class="text-sm text-white/70">Building responsive, performant websites with modern frameworks</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-8 h-8 rounded-full bg-purple-900/30 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Automation</h4>
+                                <p class="text-sm text-white/70">Creating scripts to streamline repetitive tasks and workflows</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-8 h-8 rounded-full bg-purple-900/30 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">Mobile Apps</h4>
+                                <p class="text-sm text-white/70">Developing cross-platform mobile applications</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="w-8 h-8 rounded-full bg-purple-900/30 flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white">UI/UX Design</h4>
+                                <p class="text-sm text-white/70">Crafting intuitive and visually appealing interfaces</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="glass-card-about p-8 rounded-2xl">
+                    <h3 class="text-2xl font-bold text-purple-400 mb-6">My Journey</h3>
+                    <div class="space-y-8">
+                        <div class="flex">
+                            <div class="flex flex-col items-center mr-4">
+                                <div class="w-4 h-4 bg-purple-400 rounded-full mt-1"></div>
+                                <div class="w-px h-full bg-purple-400/30"></div>
+                            </div>
+                            <div class="pb-8">
+                                <h4 class="text-lg font-semibold text-white">Information Technology Undergraduate</h4>
+                                <p class="text-sm text-purple-300 mb-1">SLIIT • 2022-2026</p>
+                                <p class="text-white/80">Specialized in Information Technology</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="flex flex-col items-center mr-4">
+                                <div class="w-4 h-4 bg-purple-400 rounded-full mt-1"></div>
+                                <div class="w-px h-full bg-purple-400/30"></div>
+                            </div>
+                            <div class="pb-8">
+                                <h4 class="text-lg font-semibold text-white">Associate Software Engineer</h4>
+                                <p class="text-sm text-purple-300 mb-1">InnobotHealth PVT LTD • Present</p>
+                                <p class="text-white/80">I’m an Associate Software Engineer at Innobot Health, a healthcare technology 
+                                    company focused on building tools and automation solutions for the Medicare space. My work primarily involves developing robust Selenium-based automation scripts, internal tools, and process optimizations that streamline operations and improve efficiency within healthcare workflows</p>
+                            </div>
+                        </div>
+                        {% comment %} <div class="flex">
+                            <div class="flex flex-col items-center mr-4">
+                                <div class="w-4 h-4 bg-purple-400 rounded-full mt-1"></div>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-white">Full Stack Developer</h4>
+                                <p class="text-sm text-purple-300 mb-1">Freelance • 2022-Present</p>
+                                <p class="text-white/80">Delivering complete solutions from database to frontend</p>
+                            </div>
+                        </div> {% endcomment %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Projects Section -->
 <section id="skills" class="min-h-screen text-white flex items-center justify-center relative overflow-hidden">
     <div class="skills-container relative w-full max-w-6xl mx-auto">
@@ -262,7 +415,7 @@
 <!-- Certifications Section -->
 <section id="certifications" class="min-h-screen text-white py-20 relative overflow-hidden z-20">
     <!-- Wave Background -->
-    <div class="ribbon-container">
+    {% comment %} <div class="ribbon-container">
         <svg class="ribbon-wave ribbon-horizontal" viewBox="0 0 2000 800" preserveAspectRatio="none">
             <path class="ribbon-path ribbon-1" d="M-200,200 Q200,150 600,250 T1400,200 T2000,300"/>
             <path class="ribbon-path ribbon-2" d="M-200,350 Q300,250 700,400 T1500,350 T2200,450"/>
@@ -278,7 +431,7 @@
         <div class="ribbon-sparkles">
             {% for _ in "x"|rjust:"12" %}<div class="sparkle"></div>{% endfor %}
         </div>
-    </div>
+    </div> {% endcomment %}
 
     <!-- Certifications Grid Container -->
     <div class="certifications-grid-container py-12 px-4">

@@ -700,3 +700,132 @@ textarea.contact-input {
 .animate-spin {
     animation: spin 1s linear infinite;
 }
+
+/* Glass Card Styles - About Section Specific */
+.glass-card-about {
+    background: rgba(45, 1, 77, 0.25);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.37),
+        inset 0 4px 12px rgba(255, 255, 255, 0.05);
+    transition: all 0.5s ease;
+    overflow: hidden;
+    position: relative;
+    padding: 2rem;
+}
+
+.glass-card-about::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(165, 108, 245, 0.1) 50%,
+        transparent 100%
+    );
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.glass-card-about:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 12px 40px rgba(165, 108, 245, 0.2),
+        inset 0 6px 16px rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+}
+
+.glass-card-about:hover::before {
+    animation: glass-shine 1.5s ease;
+}
+
+@keyframes glass-shine {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) translate(-30%, -30%);
+    }
+    50% {
+        opacity: 0.8;
+    }
+    100% {
+        opacity: 0;
+        transform: rotate(45deg) translate(30%, 30%);
+    }
+}
+
+/* About Section Specific Adjustments */
+#about .glass-card-about {
+    margin-bottom: 2rem;
+}
+
+#about .glass-card-about:last-child {
+    margin-bottom: 0;
+}
+
+#about .glass-card-about h3 {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#about .glass-card-about h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, #a56cf5, transparent);
+}
+
+/* Timeline Specific Cards */
+.timeline-card {
+    background: rgba(45, 1, 77, 0.2);
+    border-left: 2px solid #a56cf5;
+}
+
+/* Service Items in What I Do Section */
+.service-item {
+    transition: all 0.3s ease;
+    padding: 1.5rem;
+    border-radius: 12px;
+}
+
+.service-item:hover {
+    background: rgba(165, 108, 245, 0.1);
+    transform: translateX(5px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .glass-card-about {
+        padding: 1.5rem;
+    }
+    
+    #about .glass-card-about {
+        margin-bottom: 1.5rem;
+    }
+    
+    .service-item {
+        padding: 1rem;
+    }
+}
+.social-icon svg {
+  color: white;         /* For `currentColor` fallback */
+  fill: white;          /* Direct fill if SVG supports it */
+  transition: color 0.3s ease, fill 0.3s ease;
+}
+
+.social-icon:hover svg {
+  color: #a56cf5;       /* Optional: add hover effect */
+  fill: #a56cf5;
+}
